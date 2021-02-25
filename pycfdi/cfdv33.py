@@ -1,6 +1,9 @@
 from dataclasses import dataclass, field
 from decimal import Decimal
 from typing import List, Optional
+import pycfdi.assets.stylesheets
+import pycfdi.assets.schemas
+import importlib.resources
 
 __NAMESPACE__ = "http://www.sat.gob.mx/cfd/3"
 
@@ -109,6 +112,16 @@ class Comprobante:
     """
     class Meta:
         namespace = "http://www.sat.gob.mx/cfd/3"
+
+        @staticmethod
+        def stylesheet():
+            with importlib.resources.path(pycfdi.assets.stylesheets.__name__, 'cadenaoriginal_3_3.xslt') as path:
+                return path
+
+        @staticmethod
+        def schema():
+            with importlib.resources.path(pycfdi.assets.schemas.__name__, 'cfdv33.xsd') as path:
+                return path
 
     cfdi_relacionados: Optional["Comprobante.CfdiRelacionados"] = field(
         default=None,
