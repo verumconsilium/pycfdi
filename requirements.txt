@@ -1,2 +1,4 @@
 xsdata
 lxml
+validators
+cryptography
