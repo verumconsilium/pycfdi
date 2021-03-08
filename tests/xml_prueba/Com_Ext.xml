@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cce11="http://www.sat.gob.mx/ComercioExterior11" Version="3.3" Serie="EX" Folio="21" Fecha="2017-10-30T01:01:01" SubTotal="2735.00" Moneda="MXN" TipoCambio="1" Total="2297.40" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="06300" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd http://www.sat.gob.mx/ComercioExterior11 http://www.sat.gob.mx/sitio_internet/cfd/ComercioExterior11/ComercioExterior11.xsd" NoCertificado="20001000000300022817" Certificado="MIIGBzCCA++gAwIBAgIUMjAwMDEwMDAwMDAzMDAwMjI4MTcwDQYJKoZIhvcNAQELBQAwggFmMSAw HgYDVQQDDBdBLkMuIDIgZGUgcHJ1ZWJhcyg0MDk2KTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRt aW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1 cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMSkwJwYJKoZIhvcNAQkBFhphc2lzbmV0QHBydWViYXMu c2F0LmdvYi5teDEmMCQGA1UECQwdQXYuIEhpZGFsZ28gNzcsIENvbC4gR3VlcnJlcm8xDjAMBgNV BBEMBTA2MzAwMQswCQYDVQQGEwJNWDEZMBcGA1UECAwQRGlzdHJpdG8gRmVkZXJhbDESMBAGA1UE BwwJQ295b2Fjw6FuMRUwEwYDVQQtEwxTQVQ5NzA3MDFOTjMxITAfBgkqhkiG9w0BCQIMElJlc3Bv bnNhYmxlOiBBQ0RNQTAeFw0xNjEwMjUyMTU3NTZaFw0yMDEwMjUyMTU3NTZaMIHzMTAwLgYDVQQD EydSQURJT0dSQUZJQVMgSU5EVVNUUklBTEVTIERFTCBDRU5UUk8gQUMxMDAuBgNVBCkTJ1JBRElP R1JBRklBUyBJTkRVU1RSSUFMRVMgREVMIENFTlRSTyBBQzEwMC4GA1UEChMnUkFESU9HUkFGSUFT IElORFVTVFJJQUxFUyBERUwgQ0VOVFJPIEFDMSUwIwYDVQQtExxWT0M5OTAxMjlJMjYgLyBGVUFC NzcwMTE3QlhBMR4wHAYDVQQFExUgLyBGVUFCNzcwMTE3TURGUk5OMDkxFDASBgNVBAsUC1BydWVi YV9DRkRJMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlO2ox7F9hB1xqkVlkonG1ZLv xh9d1tW/fEHu4vssixClDB/QhAYjQwXZY33IYGOs2Cfhzm/ApqsXJUp+Kp2Xu8TEW744+LCIIt12 RoHl4UBLuWyUafPsgMO3bsLIDMpAGU7b7+qAShN8gQiePD8aCy/86wzPoInhLfZ2r59/ozn4TzcA MAqX2e/M8o3jSuLxlgNyVqQLSjNy8rddB89oVn51APDt/CWuha5f9BJ47X6sVqr3ZRXicuwbAnoZ VovX1XoLt8YEP2sm10Jm4+OO+rHGLM/OBqA6AZvIfPe3Z32cijkrRRz9+nmRTSrZQkjJpYKglEZR DgV+wpt9cYYiAQIDAQABox0wGzAMBgNVHRMBAf8EAjAAMAsGA1UdDwQEAwIGwDANBgkqhkiG9w0B AQsFAAOCAgEAVlOG4eH705Rl3BKjvKqs1+JJAzJbRD738gp5d1nQk6sfGYqer0AGpK0VXqmteThR Nr/KrtJg73iwr0dfvSYzZ+Krzf6PMHGzENIDdcVzcfOw3Q5v7Pj/9KEqVJGMQQXOPjoJ2fe4E8A7 TKh0zkQRZezNGmZwL7SMQPQwtgfYxUMh1jBdbCLMBzurg9thOsJyrBn49k1HjwB3HBMgZktdm5Kd g1ypCRjQcFTpKog2aWIl38nZCpWs5eheeOJgn28U6kX0TW0JqSEUwHpO6y8pWnffTL9/rKc6CxQw QRarV4qmiJrdeFq3cgk79sRgQA0fltYDB8DLF7Hkdji74glUZtrMD2XKoGMOSJrhlDJU7kphIOaw Vk1zbEON2rz3vt+NX02ovZct9Wg9lsI8FpQUcufa03vBkY3CUONPY9QUIDKw+y4Ng4+WijByUMsh YBWiZRKSZF6o4fJdj1kVUTktYZvUdB+CarxRWKt+Ga+xwztYCVfzWJSrxvD9jcynqWPKNy4m3IgJ RZ4oCiwVAsSinMRG0INUMJaSYAqa5dhyzXlg/1s0cjb4rewaypxV+S4pmW7CVci2ZWZG6QICsh+2 MeX9DaW2SYl0JFlCDmSiRIE8yvryw3S2v7MRN0ltqMNPnOmlUc8qPEVZ9OfClm39abKIe1PWI7TZ /1rM+dE4ucU=" Sello="Xrh9NcNOjYne6PpsrME+C6CbAU9qVV6J/gez7+Mx1KgAks551Wp9p5CV+aJy8oYYdv3SNHZcZlXBS0mnQTEZ2bo09fLDRDUiOdrPKfK55SjB5rtJJkMqa42EJ7SMiwvvIG0TX1Y/5jAYSPDwHPIj6Wkl9R/S8oYExMBSw3eahSKmEjH/wTYuM3OzzvmBZhMeOUYS5+E2+ae7gBF0gIs8kOQr7KjSjN4p839lUCPT3DGNSRMW29HYGq0VTM1tRPP4ylBL7lT67qYBY1uCe/KFQaeaS/NzAIEqwv6hgD5dL/Zd6ylOdSQ1q0NaTRGBC7Ew2uu0N3UTlj6dpOWAQQVlEA==">
+    <cfdi:Emisor Rfc="TUCA5703119R5" Nombre="Andrea Tuquerres Carmona " RegimenFiscal="612" />
+    <cfdi:Receptor Rfc="XEXX010101000" Nombre="Rodolfo Carranza Ramos" UsoCFDI="G03" ResidenciaFiscal="USA" NumRegIdTrib="123456780" />
+    <cfdi:Conceptos>
+        <cfdi:Concepto ClaveProdServ="39101600" Unidad="Pieza" ClaveUnidad="C81" Cantidad="500" NoIdentificacion="A-123LFM" Descripcion="Bombilla 150W " ValorUnitario="1.75" Importe="875.00">
+            <cfdi:Impuestos>
+                <cfdi:Retenciones>
+                    <cfdi:Retencion Impuesto="002" Base="875.00" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="140.00" />
+                </cfdi:Retenciones>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto ClaveProdServ="39101600" Unidad="Pieza" ClaveUnidad="C81" Cantidad="1000" NoIdentificacion="A-123JKL" Descripcion="Bombilla 100W" ValorUnitario="1.50" Importe="1500.00">
+            <cfdi:Impuestos>
+                <cfdi:Retenciones>
+                    <cfdi:Retencion Impuesto="002" Base="1500.00" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="240.00" />
+                </cfdi:Retenciones>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto ClaveProdServ="39101600" Unidad="Pieza" ClaveUnidad="C81" Cantidad="300" NoIdentificacion="A-123WHX" Descripcion="Bombilla 75W" ValorUnitario="1.20" Importe="360.00">
+            <cfdi:Impuestos>
+                <cfdi:Retenciones>
+                    <cfdi:Retencion Impuesto="002" Base="360.00" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="57.60" />
+                </cfdi:Retenciones>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+    </cfdi:Conceptos>
+    <cfdi:Impuestos TotalImpuestosRetenidos="437.60">
+        <cfdi:Retenciones>
+            <cfdi:Retencion Impuesto="002" Importe="437.60" />
+        </cfdi:Retenciones>
+    </cfdi:Impuestos>
+    <cfdi:Complemento>
+        <cce11:ComercioExterior Version="1.1" TipoOperacion="2" ClaveDePedimento="A1" CertificadoOrigen="0" Incoterm="FOB" Subdivision="0" TipoCambioUSD="18.845100" TotalUSD="4917.00">
+            <cce11:Emisor Curp="BAJS721028MDFMTR05">
+                <cce11:Domicilio Calle="Hidalgo" NumeroExterior="1000" Colonia="0209" Municipio="014" Estado="QUE" Pais="MEX" CodigoPostal="76224" />
+            </cce11:Emisor>
+            <cce11:Receptor>
+                <cce11:Domicilio Calle="Avenue Sahara" NumeroExterior="74" Colonia="BIG DESERT" Estado="NV" Pais="USA" CodigoPostal="45678" />
+            </cce11:Receptor>
+            <cce11:Mercancias>
+                <cce11:Mercancia NoIdentificacion="A-123LFM" FraccionArancelaria="94059102" CantidadAduana="1200" UnidadAduana="01" ValorUnitarioAduana="1.75" ValorDolares="2100.00" />
+                <cce11:Mercancia NoIdentificacion="A-123JKL" FraccionArancelaria="94059102" CantidadAduana="958" UnidadAduana="01" ValorUnitarioAduana="1.50" ValorDolares="1437.00" />
+                <cce11:Mercancia NoIdentificacion="A-123WHX" FraccionArancelaria="94059102" CantidadAduana="1150" UnidadAduana="01" ValorUnitarioAduana="1.20" ValorDolares="1380.00" />
+            </cce11:Mercancias>
+        </cce11:ComercioExterior>
+        <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="16C03210-36E8-4340-B18B-C56ED8573B6B" FechaTimbrado="2017-11-01T12:56:20" RfcProvCertif="SFE0807172W7" SelloCFD="Xrh9NcNOjYne6PpsrME+C6CbAU9qVV6J/gez7+Mx1KgAks551Wp9p5CV+aJy8oYYdv3SNHZcZlXBS0mnQTEZ2bo09fLDRDUiOdrPKfK55SjB5rtJJkMqa42EJ7SMiwvvIG0TX1Y/5jAYSPDwHPIj6Wkl9R/S8oYExMBSw3eahSKmEjH/wTYuM3OzzvmBZhMeOUYS5+E2+ae7gBF0gIs8kOQr7KjSjN4p839lUCPT3DGNSRMW29HYGq0VTM1tRPP4ylBL7lT67qYBY1uCe/KFQaeaS/NzAIEqwv6hgD5dL/Zd6ylOdSQ1q0NaTRGBC7Ew2uu0N3UTlj6dpOWAQQVlEA==" NoCertificadoSAT="20001000000300022779" SelloSAT="TuoperI+VkxL8vkYOiJGX+vTDIXSEpitr3kRiwZRKbf3j06iN89yWSLIC2XR69gDu0QIn1lb9h3AYiOTRglkWz7XNGLYp+eTZH0bpjCW+b9ngP0tuP2y7MCdm8nFCW/6CF6NS7YL0VcVdONr/Zq12nv3t2yNqeeryyww1Cswn7ZwlTanTKD58k/KDQNipkOHVQIcaT3M9Bn375n71WzRGw7g46WBNZeFwxwY28x/KQ7O4FtiD8i3IrtYzgrD5IaXVfQE4vozn8UHuuFbiUcxr2RhIew/omo9VV6Xz1F/wsHtaihO6+yvtLygSzflowJUS3PiwXTAu1wx7gKjgsr4mw==" />
+    </cfdi:Complemento>
+</cfdi:Comprobante>

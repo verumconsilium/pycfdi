@@ -1,6 +1,6 @@
-import unittest
 from pycfdi import cfdv33, serialization
 import xmlunittest
+import os
 
 
 class TestSerialization(xmlunittest.XmlTestCase):
@@ -25,4 +25,39 @@ class TestSerialization(xmlunittest.XmlTestCase):
 
         self.assertIsNotNone(cadena_original)
 
+    def test_raises_error_when_no_xslt_could_be_found(self):
+        xml = serialization.serialize(cfdv33.Comprobante())
+        exception_msg = 'XSLT was not provided nor could it be found automatically for the object.'
 
+        with self.assertRaises(ValueError) as ctx:
+            serialization.cadena_original(xml)
+            self.assertEqual(str(ctx.exception), exception_msg)
+
+    def test_deserialize_from_path_str(self):
+        path_str = os.path.join(os.path.dirname(__file__), 'xml_prueba', 'CFDI.xml')
+        comprobante = serialization.deserialize(path_str)
+
+        self.assertIsInstance(comprobante, cfdv33.Comprobante)
+
+    def test_deserialize_from_path_object(self):
+        path_str = os.path.join(os.path.dirname(__file__), 'xml_prueba', 'CFDI.xml')
+        from pathlib import Path
+        path = Path(path_str)
+        comprobante = serialization.deserialize(path)
+
+        self.assertIsInstance(comprobante, cfdv33.Comprobante)
+
+    def test_deserialize_from_bytes(self):
+        path_str = os.path.join(os.path.dirname(__file__), 'xml_prueba', 'CFDI.xml')
+        from pathlib import Path
+        path = Path(path_str)
+        comprobante = serialization.deserialize(path.read_bytes())
+
+        self.assertIsInstance(comprobante, cfdv33.Comprobante)
+
+    def test_generates_cadena_original_from_xslt_url(self):
+        xslt_url = 'http://www.sat.gob.mx/sitio_internet/cfd/3/cadenaoriginal_3_3/cadenaoriginal_3_3.xslt'
+
+        cadena_original = serialization.cadena_original(cfdv33.Comprobante(), xslt_url)
+
+        self.assertIsNotNone(cadena_original)
