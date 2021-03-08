@@ -2,3 +2,4 @@ xsdata
 lxml
 validators
 cryptography
+xmlunittest
