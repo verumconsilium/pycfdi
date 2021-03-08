@@ -47,10 +47,10 @@ def certificado_base64(cer: x509.Certificate) -> str:
 
 def no_certificado(cer: x509.Certificate) -> str:
     hex_serial_number = '%x' % cer.serial_number
-    serial = ''
+    serial_number_parts = []
 
     for i in range(len(hex_serial_number)):
         if i % 2 != 0:
-            serial += hex_serial_number[i]
+            serial_number_parts.append(hex_serial_number[i])
 
-    return serial
+    return ''.join(serial_number_parts)
