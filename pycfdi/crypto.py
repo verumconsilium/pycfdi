@@ -1,5 +1,4 @@
 import base64
-import hashlib
 from typing import Union
 from pycfdi import exceptions
 from cryptography import x509
@@ -25,10 +24,9 @@ def sellar(message: Union[bytes, str], private_key: rsa.RSAPrivateKey) -> str:
     if isinstance(message, str):
         message = message.encode()
 
-    prehashed_bytes = hashlib.sha256(message).hexdigest().encode()
 
     signed = private_key.sign(
-        prehashed_bytes,
+        message,
         padding.PSS(
             mgf=padding.MGF1(hashes.SHA256()),
             salt_length=padding.PSS.MAX_LENGTH
