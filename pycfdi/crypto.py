@@ -37,7 +37,7 @@ def sellar(message: Union[bytes, str], private_key: rsa.RSAPrivateKey) -> str:
 
 
 def certificado_base64(cer: x509.Certificate) -> str:
-    encoding = serialization.Encoding('DER')
+    encoding = serialization.Encoding.DER
     cer_bytes = cer.public_bytes(encoding)
     base64_bytes = base64.b64encode(cer_bytes)
 

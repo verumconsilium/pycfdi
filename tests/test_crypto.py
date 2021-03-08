@@ -65,7 +65,7 @@ class TestCrypto(unittest.TestCase):
 
         self.assertValidSignature(key.public_key(), signed, message.encode('utf-8'))
 
-    def assertValidSignature(self, public_key: rsa.RSAPublicKey, signedBase64: str, message: bytes):
+    def assertValidSignature(self, public_key: rsa.RSAPublicKey, signed_base64: str, message: bytes):
         from cryptography.hazmat.primitives import hashes
         from cryptography.hazmat.primitives.asymmetric import padding, utils
         import base64
@@ -75,14 +75,13 @@ class TestCrypto(unittest.TestCase):
 
         # si la firma es invalida, este metodo arroja una excepcion
         public_key.verify(
-            base64.b64decode(signedBase64),
+            base64.b64decode(signed_base64),
             digest,
             padding.PKCS1v15(),
             utils.Prehashed(hashes.SHA256())
         )
 
         self.assertTrue(True)
-
 
     @staticmethod
     def _get_certificado_prueba(tipo_persona: str) -> x509.Certificate:
