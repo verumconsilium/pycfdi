@@ -63,22 +63,22 @@ class TestCrypto(unittest.TestCase):
 
         signed = pycfdi.crypto.sellar(message, key)
 
-        self.assertValidSignature(key.public_key(), signed, message.encode())
+        self.assertValidSignature(key.public_key(), signed, message.encode('utf-8'))
 
     def assertValidSignature(self, public_key: rsa.RSAPublicKey, signedBase64: str, message: bytes):
         from cryptography.hazmat.primitives import hashes
-        from cryptography.hazmat.primitives.asymmetric import padding
+        from cryptography.hazmat.primitives.asymmetric import padding, utils
         import base64
+        import hashlib
+
+        digest = hashlib.sha256(message).digest()
 
         # si la firma es invalida, este metodo arroja una excepcion
         public_key.verify(
             base64.b64decode(signedBase64),
-            message,
-            padding.PSS(
-                mgf=padding.MGF1(hashes.SHA256()),
-                salt_length=padding.PSS.MAX_LENGTH
-            ),
-            hashes.SHA256()
+            digest,
+            padding.PKCS1v15(),
+            utils.Prehashed(hashes.SHA256())
         )
 
         self.assertTrue(True)

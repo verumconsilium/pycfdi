@@ -1,9 +1,10 @@
 import base64
+import hashlib
 from typing import Union
 from pycfdi import exceptions
 from cryptography import x509
 from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.asymmetric import rsa, padding
+from cryptography.hazmat.primitives.asymmetric import rsa, padding, utils
 from cryptography.hazmat.primitives import serialization
 
 
@@ -22,16 +23,14 @@ def leer_llave_privada(key_bytes: bytes, password: str) -> rsa.RSAPrivateKey:
 
 def sellar(message: Union[bytes, str], private_key: rsa.RSAPrivateKey) -> str:
     if isinstance(message, str):
-        message = message.encode()
+        message = message.encode('utf-8')
 
+    digest = hashlib.sha256(message).digest()
 
     signed = private_key.sign(
-        message,
-        padding.PSS(
-            mgf=padding.MGF1(hashes.SHA256()),
-            salt_length=padding.PSS.MAX_LENGTH
-        ),
-        hashes.SHA256()
+        digest,
+        padding.PKCS1v15(),
+        utils.Prehashed(hashes.SHA256())
     )
 
     return base64.b64encode(signed).decode('utf-8')
