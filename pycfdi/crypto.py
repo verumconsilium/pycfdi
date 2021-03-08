@@ -1,22 +1,27 @@
 import base64
 import hashlib
 from typing import Union
-from cryptography.x509 import Certificate, load_der_x509_certificate
+from pycfdi import exceptions
+from cryptography import x509
 from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey
-from cryptography.hazmat.primitives.serialization import Encoding, load_der_private_key
-from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.hazmat.primitives.asymmetric import rsa, padding
+from cryptography.hazmat.primitives import serialization
 
 
-def leer_certificado(cer_bytes: bytes) -> Certificate:
-    return load_der_x509_certificate(cer_bytes)
+def leer_certificado(cer_bytes: bytes) -> x509.Certificate:
+    return x509.load_der_x509_certificate(cer_bytes)
 
 
-def leer_llave_privada(key_bytes: bytes, password: str) -> RSAPrivateKey:
-    return load_der_private_key(key_bytes, password=password.encode())
+def leer_llave_privada(key_bytes: bytes, password: str) -> rsa.RSAPrivateKey:
+    try:
+        return serialization.load_der_private_key(key_bytes, password=password.encode())
+    except ValueError as e:
+        if 'Incorrect password' in str(e):
+            raise exceptions.crypto.IncorrectPasswordError()
+        raise e
 
 
-def sellar(message: Union[bytes, str], private_key: RSAPrivateKey) -> str:
+def sellar(message: Union[bytes, str], private_key: rsa.RSAPrivateKey) -> str:
     if isinstance(message, str):
         message = message.encode()
 
@@ -34,15 +39,15 @@ def sellar(message: Union[bytes, str], private_key: RSAPrivateKey) -> str:
     return base64.b64encode(signed).decode('ascii')
 
 
-def certificado_base64(cer: Certificate) -> str:
-    encoding = Encoding('DER')
+def certificado_base64(cer: x509.Certificate) -> str:
+    encoding = serialization.Encoding('DER')
     cer_bytes = cer.public_bytes(encoding)
     base64_bytes = base64.b64encode(cer_bytes)
 
     return base64_bytes.decode('ascii')
 
 
-def no_certificado(cer: Certificate) -> str:
+def no_certificado(cer: x509.Certificate) -> str:
     hex_serial_number = '%x' % cer.serial_number
     serial = ''
 
