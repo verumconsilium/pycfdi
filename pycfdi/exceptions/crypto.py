@@ -1,0 +1,2 @@
+class IncorrectPasswordError(Exception):
+    pass
