@@ -34,7 +34,7 @@ def sellar(message: Union[bytes, str], private_key: rsa.RSAPrivateKey) -> str:
         hashes.SHA256()
     )
 
-    return base64.b64encode(signed).decode('ascii')
+    return base64.b64encode(signed).decode('utf-8')
 
 
 def certificado_base64(cer: x509.Certificate) -> str:
@@ -42,7 +42,7 @@ def certificado_base64(cer: x509.Certificate) -> str:
     cer_bytes = cer.public_bytes(encoding)
     base64_bytes = base64.b64encode(cer_bytes)
 
-    return base64_bytes.decode('ascii')
+    return base64_bytes.decode('utf-8')
 
 
 def no_certificado(cer: x509.Certificate) -> str:
