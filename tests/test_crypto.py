@@ -65,6 +65,22 @@ class TestCrypto(unittest.TestCase):
 
         self.assertValidSignature(key.public_key(), signed, message.encode('utf-8'))
 
+    def test_is_pareja_valid_for_valid_pareja(self):
+        key = self._get_llave_privada_prueba('persona_fisica')
+        cer = self._get_certificado_prueba('persona_fisica')
+
+        is_pareja = pycfdi.crypto.is_pareja(cer, key)
+
+        self.assertTrue(is_pareja)
+
+    def test_is_pareja_invalid_for_invalid_pareja(self):
+        key = self._get_llave_privada_prueba('persona_fisica')
+        cer = self._get_certificado_prueba('persona_moral')
+
+        is_pareja = pycfdi.crypto.is_pareja(cer, key)
+
+        self.assertFalse(is_pareja)
+
     def assertValidSignature(self, public_key: rsa.RSAPublicKey, signed_base64: str, message: bytes):
         from cryptography.hazmat.primitives import hashes
         from cryptography.hazmat.primitives.asymmetric import padding, utils

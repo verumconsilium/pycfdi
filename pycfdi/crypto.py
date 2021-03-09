@@ -53,3 +53,10 @@ def no_certificado(cer: x509.Certificate) -> str:
             serial_number_parts.append(hex_serial_number[i])
 
     return ''.join(serial_number_parts)
+
+
+def is_pareja(cer: x509.Certificate, private_key: rsa.RSAPrivateKey) -> bool:
+    encoding = serialization.Encoding.PEM
+    fmt = serialization.PublicFormat.PKCS1
+
+    return cer.public_key().public_bytes(encoding, fmt) == private_key.public_key().public_bytes(encoding, fmt)
