@@ -14,5 +14,5 @@ setup(
     version=pkg_vars['__version__'],
     include_package_data=True,
     install_requires=install_requires,
-    packages=find_packages()
+    packages=find_packages(exclude=('tests',)),
 )
