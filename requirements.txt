@@ -1,5 +1,5 @@
-xsdata
-lxml
-validators
-cryptography
-xmlunittest
+xsdata==21.2
+lxml==4.6.2
+validators==0.18.2
+cryptography==3.3.2
+xmlunittest==0.5.0
