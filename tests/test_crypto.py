@@ -8,6 +8,16 @@ from cryptography.hazmat.primitives.asymmetric import rsa
 from pycfdi import exceptions
 
 TEST_PRIVATE_KEYS_PASSWORD = '12345678a'
+DATOS_PERSONA_FISICA = {
+    'rfc': 'WATM640917J45',
+    'nombre': 'MARIA WATEMBER TORRES',
+    'no_certificado': '30001000000400002308'
+}
+DATOS_PERSONA_MORAL = {
+    'rfc': 'EWE1709045U0',
+    'nombre': 'ESCUELA WILSON ESQUIVEL S DE CV',
+    'no_certificado': '30001000000400002429'
+}
 
 
 class TestCrypto(unittest.TestCase):
@@ -33,8 +43,14 @@ class TestCrypto(unittest.TestCase):
         cer_persona_moral = self._get_certificado_prueba('persona_moral')
         cer_persona_fisica = self._get_certificado_prueba('persona_fisica')
 
-        self.assertEqual('30001000000400002429', pycfdi.crypto.no_certificado(cer_persona_moral))
-        self.assertEqual('30001000000400002308', pycfdi.crypto.no_certificado(cer_persona_fisica))
+        self.assertEqual(
+            DATOS_PERSONA_MORAL.get('no_certificado'),
+            pycfdi.crypto.no_certificado(cer_persona_moral)
+        )
+        self.assertEqual(
+            DATOS_PERSONA_FISICA.get('no_certificado'),
+            pycfdi.crypto.no_certificado(cer_persona_fisica)
+        )
 
     def test_leer_llave_privada(self):
         key = self._get_llave_privada_prueba('persona_moral')
@@ -80,6 +96,26 @@ class TestCrypto(unittest.TestCase):
         is_pareja = pycfdi.crypto.is_pareja(cer, key)
 
         self.assertFalse(is_pareja)
+
+    def test_get_rfc(self):
+        cer_fisica = self._get_certificado_prueba('persona_fisica')
+        rfc_fisica = pycfdi.crypto.get_rfc(cer_fisica)
+
+        cer_moral = self._get_certificado_prueba('persona_moral')
+        rfc_moral = pycfdi.crypto.get_rfc(cer_moral)
+
+        self.assertEqual(rfc_fisica, DATOS_PERSONA_FISICA.get('rfc'))
+        self.assertEqual(rfc_moral, DATOS_PERSONA_MORAL.get('rfc'))
+
+    def test_get_nombre(self):
+        cer_fisica = self._get_certificado_prueba('persona_fisica')
+        rfc_fisica = pycfdi.crypto.get_certificate_name(cer_fisica)
+
+        cer_moral = self._get_certificado_prueba('persona_moral')
+        rfc_moral = pycfdi.crypto.get_certificate_name(cer_moral)
+
+        self.assertEqual(rfc_fisica, DATOS_PERSONA_FISICA.get('nombre'))
+        self.assertEqual(rfc_moral, DATOS_PERSONA_MORAL.get('nombre'))
 
     def assertValidSignature(self, public_key: rsa.RSAPublicKey, signed_base64: str, message: bytes):
         from cryptography.hazmat.primitives import hashes

@@ -60,3 +60,28 @@ def is_pareja(cer: x509.Certificate, private_key: rsa.RSAPrivateKey) -> bool:
     fmt = serialization.PublicFormat.PKCS1
 
     return cer.public_key().public_bytes(encoding, fmt) == private_key.public_key().public_bytes(encoding, fmt)
+
+
+def get_rfc(cer: x509.Certificate) -> str:
+    return __get_subject_value_for_oid(
+        cer=cer,
+        oid=x509.NameOID.X500_UNIQUE_IDENTIFIER,
+        attribute='RFC'
+    )
+
+
+def get_certificate_name(cer: x509.Certificate) -> str:
+    return __get_subject_value_for_oid(
+        cer=cer,
+        oid=x509.NameOID.COMMON_NAME,
+        attribute='Name'
+    )
+
+
+def __get_subject_value_for_oid(cer: x509.Certificate, oid: x509.ObjectIdentifier, attribute: str) -> str:
+    attributes = cer.subject.get_attributes_for_oid(oid)
+
+    if len(attributes) == 0:
+        raise ValueError(f"Failed to read {attribute} from certificate.")
+
+    return attributes[0].value.split('/')[0].strip()
