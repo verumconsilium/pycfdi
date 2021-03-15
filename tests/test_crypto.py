@@ -6,19 +6,9 @@ import os
 from cryptography import x509
 from cryptography.hazmat.primitives.asymmetric import rsa
 from pycfdi import exceptions
+from tests import DATOS_PERSONA_FISICA, DATOS_PERSONA_MORAL
 
 TEST_PRIVATE_KEYS_PASSWORD = '12345678a'
-DATOS_PERSONA_FISICA = {
-    'rfc': 'WATM640917J45',
-    'nombre': 'MARIA WATEMBER TORRES',
-    'no_certificado': '30001000000400002308'
-}
-DATOS_PERSONA_MORAL = {
-    'rfc': 'EWE1709045U0',
-    'nombre': 'ESCUELA WILSON ESQUIVEL S DE CV',
-    'no_certificado': '30001000000400002429'
-}
-
 
 class TestCrypto(unittest.TestCase):
 
