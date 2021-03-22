@@ -22,6 +22,7 @@ class Pagos:
     """
     class Meta:
         namespace = "http://www.sat.gob.mx/Pagos"
+        namespace_prefix = "pago10"
 
     pago: List["Pagos.Pago"] = field(
         default_factory=list,

@@ -8,18 +8,15 @@ from xsdata.formats.dataclass.serializers.config import SerializerConfig
 from xsdata.formats.dataclass.parsers import XmlParser
 import os.path
 
-NS_MAP = {
-    'cfdi': 'http://www.sat.gob.mx/cfd/3'
-}
-
 T = TypeVar("T")
 
 
 def serialize(obj: object) -> str:
+    ns_map = __get_ns_map(obj)
     config = SerializerConfig(xml_version='1.0', encoding='UTF-8', schema_location='', pretty_print=True)
     serializer = XmlSerializer(config=config)
 
-    return serializer.render(obj, ns_map=NS_MAP)
+    return serializer.render(obj, ns_map=ns_map)
 
 
 def deserialize(resource: Union[str, Path, bytes], target_class: Optional[Type[T]] = None) -> Optional[T]:
@@ -54,6 +51,24 @@ def cadena_original(obj: Union[object, str, bytes, Path], xslt: Union[str, Path,
     result = transform(xml_root)
 
     return str(result)
+
+
+def __get_ns_map(obj: object) -> dict:
+    meta_classes = []
+    if hasattr(obj, 'Meta'):
+        meta_classes.append(obj.Meta)
+
+    if hasattr(obj, 'complemento') \
+            and hasattr(obj.complemento, 'any_element') \
+            and isinstance(obj.complemento.any_element, list):
+        meta_classes += [getattr(x, 'Meta') for x in obj.complemento.any_element if hasattr(x, 'Meta')]
+
+    ns_map = {}
+
+    for meta in meta_classes:
+        ns_map[getattr(meta, 'namespace_prefix', None)] = getattr(meta, 'namespace', None)
+
+    return ns_map
 
 
 def __get_xslt_transform(xslt_root: etree.ElementTree) -> etree.XSLT:

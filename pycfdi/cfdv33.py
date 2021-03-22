@@ -112,6 +112,7 @@ class Comprobante:
     """
     class Meta:
         namespace = "http://www.sat.gob.mx/cfd/3"
+        namespace_prefix = "cfdi"
 
         @staticmethod
         def stylesheet():
@@ -162,7 +163,7 @@ class Comprobante:
         }
     )
     complemento: List["Comprobante.Complemento"] = field(
-        default_factory=list,
+        default=None,
         metadata={
             "name": "Complemento",
             "type": "Element",
