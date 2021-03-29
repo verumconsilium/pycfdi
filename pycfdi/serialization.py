@@ -13,7 +13,13 @@ T = TypeVar("T")
 
 def serialize(obj: object) -> str:
     ns_map = __get_ns_map(obj)
-    config = SerializerConfig(xml_version='1.0', encoding='UTF-8', schema_location='', pretty_print=True)
+    schema_location = __get_ns_schema_location(obj)
+    config = SerializerConfig(
+        xml_version='1.0',
+        encoding='UTF-8',
+        schema_location=schema_location,
+        pretty_print=True
+    )
     serializer = XmlSerializer(config=config)
 
     return serializer.render(obj, ns_map=ns_map)
@@ -54,6 +60,26 @@ def cadena_original(obj: Union[object, str, bytes, Path], xslt: Union[str, Path,
 
 
 def __get_ns_map(obj: object) -> dict:
+    meta_classes = __get_meta_classes(obj)
+    ns_map = {}
+
+    for meta in meta_classes:
+        ns_map[getattr(meta, 'namespace_prefix', None)] = getattr(meta, 'namespace', None)
+
+    return ns_map
+
+
+def __get_ns_schema_location(obj: object) -> str:
+    meta_classes = __get_meta_classes(obj)
+    schema_locations = [
+        getattr(meta, 'namespace', '') + ' ' + getattr(meta, 'schema_location', '')
+        for meta in meta_classes
+    ]
+
+    return ' '.join(schema_locations)
+
+
+def __get_meta_classes(obj: object) -> list:
     meta_classes = []
     if hasattr(obj, 'Meta'):
         meta_classes.append(obj.Meta)
@@ -63,12 +89,7 @@ def __get_ns_map(obj: object) -> dict:
             and isinstance(obj.complemento.any_element, list):
         meta_classes += [getattr(x, 'Meta') for x in obj.complemento.any_element if hasattr(x, 'Meta')]
 
-    ns_map = {}
-
-    for meta in meta_classes:
-        ns_map[getattr(meta, 'namespace_prefix', None)] = getattr(meta, 'namespace', None)
-
-    return ns_map
+    return meta_classes
 
 
 def __get_xslt_transform(xslt_root: etree.ElementTree) -> etree.XSLT:

@@ -113,6 +113,7 @@ class Comprobante:
     class Meta:
         namespace = "http://www.sat.gob.mx/cfd/3"
         namespace_prefix = "cfdi"
+        schema_location = "http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd"
 
         @staticmethod
         def stylesheet():
