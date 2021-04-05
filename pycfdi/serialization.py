@@ -6,9 +6,16 @@ from xsdata.formats.dataclass.context import XmlContext
 from xsdata.formats.dataclass.serializers import XmlSerializer
 from xsdata.formats.dataclass.serializers.config import SerializerConfig
 from xsdata.formats.dataclass.parsers import XmlParser
+from xsdata.utils import namespaces
 import os.path
+from pycfdi.complementos import (pagos10, timbre_fiscal_digitalv11)
 
 T = TypeVar("T")
+
+COMPLEMENTO_TYPES_MAP = {
+    'http://www.sat.gob.mx/Pagos': pagos10.Pagos,
+    'http://www.sat.gob.mx/TimbreFiscalDigital': timbre_fiscal_digitalv11.TimbreFiscalDigital
+}
 
 
 def serialize(obj: object) -> str:
@@ -31,7 +38,6 @@ def deserialize(resource: Union[str, Path, bytes], target_class: Optional[Type[T
 
     if os.path.isfile(resource):
         resource = Path(resource)
-        pass
 
     if isinstance(resource, str):
         obj = parser.from_string(resource, target_class)
@@ -39,6 +45,10 @@ def deserialize(resource: Union[str, Path, bytes], target_class: Optional[Type[T
         obj = parser.from_path(resource, target_class)
     if isinstance(resource, bytes):
         obj = parser.from_bytes(resource, target_class)
+
+    if obj and hasattr(obj, 'complemento'):
+        complementos = __deserialize_complementos(obj)
+        setattr(obj.complemento, 'any_element', complementos)
 
     return obj
 
@@ -115,3 +125,23 @@ def __get_element_tree(source: Union[str, Path, bytes, object, Callable]) -> etr
         return etree.XML(serialize(source).encode())
 
     return None
+
+
+def __deserialize_complementos(obj: object) -> list:
+    complementos = []
+    if not obj or not hasattr(obj, 'complemento'):
+        return complementos
+
+    obj.complemento = obj.complemento[0] if isinstance(obj.complemento, list) else obj.complemento
+    for complemento in getattr(obj.complemento, 'any_element', []):
+        ns, tag = namespaces.split_qname(getattr(complemento, 'qname', ''))
+        complemento_type = COMPLEMENTO_TYPES_MAP.get(ns)
+
+        if not complemento_type:
+            continue
+
+        delattr(complemento, 'qname')
+        complemento = deserialize(serialize(complemento), complemento_type)
+        complementos.append(complemento)
+
+    return complementos
