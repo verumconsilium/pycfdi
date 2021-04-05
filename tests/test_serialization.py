@@ -70,8 +70,8 @@ class TestSerialization(xmlunittest.XmlTestCase):
         path = Path(path_str)
         comprobante = serialization.deserialize(path.read_bytes())
 
-        tfd = next(c for c in comprobante.complemento.any_element if type(c) == timbre_fiscal_digitalv11.TimbreFiscalDigital)
-        pagos = next(c for c in comprobante.complemento.any_element if type(c) == pagos10.Pagos)
+        tfd = comprobante.get_complemento_by_type(timbre_fiscal_digitalv11.TimbreFiscalDigital)
+        pagos = comprobante.get_complemento_by_type(pagos10.Pagos)
 
         self.assertIsInstance(tfd, timbre_fiscal_digitalv11.TimbreFiscalDigital)
         self.assertIsInstance(pagos, pagos10.Pagos)

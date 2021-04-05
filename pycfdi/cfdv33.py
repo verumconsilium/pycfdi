@@ -125,6 +125,13 @@ class Comprobante:
             with importlib.resources.path(pycfdi.assets.schemas.__name__, 'cfdv33.xsd') as path:
                 return path
 
+    def get_complemento_by_type(self, complemento_type: type):
+        complementos = self.complemento[0] if isinstance(self.complemento, list) else self.complemento
+
+        return next((
+            c for c in getattr(complementos, 'any_element', []) if type(c) == complemento_type
+        ), None)
+
     cfdi_relacionados: Optional["Comprobante.CfdiRelacionados"] = field(
         default=None,
         metadata={
