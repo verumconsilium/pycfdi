@@ -46,7 +46,7 @@ class TimbreFiscalDigital:
 
         @staticmethod
         def stylesheet():
-            with importlib.resources.path(pycfdi.assets.stylesheets.__name__, 'cadenaoriginal_TFD_1_1.xslt.xslt') as path:
+            with importlib.resources.path(pycfdi.assets.stylesheets.__name__, 'cadenaoriginal_TFD_1_1.xslt') as path:
                 return path
 
     version: str = field(
