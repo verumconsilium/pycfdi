@@ -46,7 +46,7 @@ def deserialize(resource: Union[str, Path, bytes], target_class: Optional[Type[T
     if isinstance(resource, bytes):
         obj = parser.from_bytes(resource, target_class)
 
-    if obj and hasattr(obj, 'complemento'):
+    if obj and hasattr(obj, 'complemento') and obj.complemento:
         complementos = __deserialize_complementos(obj)
         setattr(obj.complemento, 'any_element', complementos)
 
