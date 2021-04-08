@@ -75,3 +75,17 @@ class TestSerialization(xmlunittest.XmlTestCase):
 
         self.assertIsInstance(tfd, timbre_fiscal_digitalv11.TimbreFiscalDigital)
         self.assertIsInstance(pagos, pagos10.Pagos)
+
+    def test_generates_cadena_original_for_tfd(self):
+        from pathlib import Path
+        from pycfdi.complementos import pagos10, timbre_fiscal_digitalv11
+
+        path_str = os.path.join(os.path.dirname(__file__), 'xml_prueba', 'pago.xml')
+        path = Path(path_str)
+        comprobante = serialization.deserialize(path.read_bytes())
+
+        tfd = comprobante.get_complemento_by_type(timbre_fiscal_digitalv11.TimbreFiscalDigital)
+        cadena_original = serialization.cadena_original(tfd)
+
+        self.assertIsNotNone(cadena_original)
+
