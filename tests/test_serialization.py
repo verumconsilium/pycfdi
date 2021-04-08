@@ -2,6 +2,8 @@ from pycfdi import cfdv33, serialization
 import xmlunittest
 import os
 
+TEST_XMLS_PATH = os.path.join(os.path.dirname(__file__), 'xml_prueba')
+
 
 class TestSerialization(xmlunittest.XmlTestCase):
     def test_serialize_deserialize(self):
@@ -34,13 +36,13 @@ class TestSerialization(xmlunittest.XmlTestCase):
             self.assertEqual(str(ctx.exception), exception_msg)
 
     def test_deserialize_from_path_str(self):
-        path_str = os.path.join(os.path.dirname(__file__), 'xml_prueba', 'CFDI.xml')
+        path_str = self._get_test_xml_path('CFDI.xml')
         comprobante = serialization.deserialize(path_str)
 
         self.assertIsInstance(comprobante, cfdv33.Comprobante)
 
     def test_deserialize_from_path_object(self):
-        path_str = os.path.join(os.path.dirname(__file__), 'xml_prueba', 'CFDI.xml')
+        path_str = self._get_test_xml_path('CFDI.xml')
         from pathlib import Path
         path = Path(path_str)
         comprobante = serialization.deserialize(path)
@@ -48,7 +50,8 @@ class TestSerialization(xmlunittest.XmlTestCase):
         self.assertIsInstance(comprobante, cfdv33.Comprobante)
 
     def test_deserialize_from_bytes(self):
-        path_str = os.path.join(os.path.dirname(__file__), 'xml_prueba', 'CFDI.xml')
+        path_str = self._get_test_xml_path('CFDI.xml')
+
         from pathlib import Path
         path = Path(path_str)
         comprobante = serialization.deserialize(path.read_bytes())
@@ -57,18 +60,15 @@ class TestSerialization(xmlunittest.XmlTestCase):
 
     def test_generates_cadena_original_from_xslt_url(self):
         xslt_url = 'http://www.sat.gob.mx/sitio_internet/cfd/3/cadenaoriginal_3_3/cadenaoriginal_3_3.xslt'
-
         cadena_original = serialization.cadena_original(cfdv33.Comprobante(), xslt_url)
 
         self.assertIsNotNone(cadena_original)
 
     def test_unmarshalls_complementos_into_types(self):
-        from pathlib import Path
         from pycfdi.complementos import pagos10, timbre_fiscal_digitalv11
 
-        path_str = os.path.join(os.path.dirname(__file__), 'xml_prueba', 'pago.xml')
-        path = Path(path_str)
-        comprobante = serialization.deserialize(path.read_bytes())
+        path_str = self._get_test_xml_path('pago.xml')
+        comprobante = serialization.deserialize(path_str)
 
         tfd = comprobante.get_complemento_by_type(timbre_fiscal_digitalv11.TimbreFiscalDigital)
         pagos = comprobante.get_complemento_by_type(pagos10.Pagos)
@@ -77,15 +77,17 @@ class TestSerialization(xmlunittest.XmlTestCase):
         self.assertIsInstance(pagos, pagos10.Pagos)
 
     def test_generates_cadena_original_for_tfd(self):
-        from pathlib import Path
-        from pycfdi.complementos import pagos10, timbre_fiscal_digitalv11
+        from pycfdi.complementos import timbre_fiscal_digitalv11
 
-        path_str = os.path.join(os.path.dirname(__file__), 'xml_prueba', 'pago.xml')
-        path = Path(path_str)
-        comprobante = serialization.deserialize(path.read_bytes())
+        path_str = self._get_test_xml_path('CFDI.xml')
+        comprobante = serialization.deserialize(path_str)
 
         tfd = comprobante.get_complemento_by_type(timbre_fiscal_digitalv11.TimbreFiscalDigital)
         cadena_original = serialization.cadena_original(tfd)
 
         self.assertIsNotNone(cadena_original)
+
+    @staticmethod
+    def _get_test_xml_path(filename: str) -> str:
+        return os.path.join(TEST_XMLS_PATH, filename)
 
