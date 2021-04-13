@@ -1288,6 +1288,8 @@ class Comprobante:
 
 @dataclass
 class Cancelacion:
+    class Meta:
+        namespace = "http://cancelacfd.sat.gob.mx"
 
     rfc_emisor: Optional[str] = field(
         default=None,
