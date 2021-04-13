@@ -25,12 +25,12 @@ def leer_llave_privada(key_bytes: bytes, password: str) -> rsa.RSAPrivateKey:
         raise e
 
 
-def xmldsig(data, cer: x509.Certificate, private_key: rsa.RSAPrivateKey) -> str:
+def xmldsig(data, cer: x509.Certificate, private_key: rsa.RSAPrivateKey) -> bytes:
     import os.path
     import OpenSSL
 
     if is_dataclass(data):
-        data = pycfdi.serialization.serialize(data)
+        data = pycfdi.serialization.serialize(data).encode('utf-8')
 
     if os.path.isfile(data):
         data = etree.parse(data)
@@ -53,7 +53,7 @@ def xmldsig(data, cer: x509.Certificate, private_key: rsa.RSAPrivateKey) -> str:
 
     certificate.text = certificate.text.replace('\n', '')
 
-    return etree.tostring(element, xml_declaration=True)
+    return etree.tostring(element, xml_declaration=True, encoding='utf-8')
 
 
 def sellar(message: Union[bytes, str], private_key: rsa.RSAPrivateKey) -> str:
