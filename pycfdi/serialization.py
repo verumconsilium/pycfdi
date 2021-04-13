@@ -83,7 +83,7 @@ def __get_ns_schema_location(obj: object) -> str:
     meta_classes = __get_meta_classes(obj)
     schema_locations = [
         getattr(meta, 'namespace', '') + ' ' + getattr(meta, 'schema_location', '')
-        for meta in meta_classes
+        for meta in meta_classes if hasattr(meta, 'schema_location')
     ]
 
     return ' '.join(schema_locations)
