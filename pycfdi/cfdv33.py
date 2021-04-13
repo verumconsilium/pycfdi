@@ -1284,3 +1284,53 @@ class Comprobante:
                 "min_occurs": 1,
             }
         )
+
+
+@dataclass
+class Cancelacion:
+
+    rfc_emisor: Optional[str] = field(
+        default=None,
+        metadata={
+            "name": "RfcEmisor",
+            "type": "Attribute",
+            "required": False,
+        }
+    )
+
+    fecha: Optional[str] = field(
+        default=None,
+        metadata={
+            "name": "Fecha",
+            "type": "Attribute",
+            "required": True,
+        }
+    )
+
+    folios: List["Cancelacion.Folios"] = field(
+        default_factory=list,
+        metadata={
+            "name": "Folios",
+            "type": "Element",
+            "min_occurs": 1,
+        }
+    )
+
+    @dataclass
+    class Folios:
+        uuid: Optional["Cancelacion.Folios.UUID"] = field(
+            default=None,
+            metadata={
+                "name": "UUID",
+                "type": "Element",
+                "required": True,
+            }
+        )
+
+        @dataclass
+        class UUID:
+            class Meta:
+                name = "UUID"
+
+            value: Optional[str] = field(default=None)
+
