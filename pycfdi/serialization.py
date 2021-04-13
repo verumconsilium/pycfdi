@@ -18,14 +18,14 @@ COMPLEMENTO_TYPES_MAP = {
 }
 
 
-def serialize(obj: object) -> str:
+def serialize(obj: object, pretty_print: bool = False) -> str:
     ns_map = __get_ns_map(obj)
     schema_location = __get_ns_schema_location(obj)
     config = SerializerConfig(
         xml_version='1.0',
         encoding='UTF-8',
         schema_location=schema_location,
-        pretty_print=True
+        pretty_print=pretty_print
     )
     serializer = XmlSerializer(config=config)
 
