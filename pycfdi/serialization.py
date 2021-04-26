@@ -76,6 +76,9 @@ def __get_ns_map(obj: object) -> dict:
     for meta in meta_classes:
         ns_map[getattr(meta, 'namespace_prefix', None)] = getattr(meta, 'namespace', None)
 
+    ns_map['xsd'] = 'http://www.w3.org/2001/XMLSchema'
+    ns_map['xsi'] = 'http://www.w3.org/2001/XMLSchema-instance'
+
     return ns_map
 
 
