@@ -132,6 +132,21 @@ class Comprobante:
             c for c in getattr(complementos, 'any_element', []) if type(c) == complemento_type
         ), None)
 
+    def expresion_impresa(self) -> str:
+        from pycfdi.complementos import timbre_fiscal_digitalv11
+
+        tfd = self.get_complemento_by_type(timbre_fiscal_digitalv11.TimbreFiscalDigital)
+        re = self.emisor.rfc
+        rr = self.receptor.rfc
+        tt = self.total
+        id = getattr(tfd, 'uuid', None)
+        fe = getattr(tfd, 'sello_cfd', '')[-8:]
+
+        return f'?id={id}&re={re}&rr={rr}&tt={tt}&fe={fe}'
+
+    def verifica_cfdi_url(self):
+        return 'https://verificacfdi.facturaelectronica.sat.gob.mx/default.aspx' + self.expresion_impresa()
+
     cfdi_relacionados: Optional["Comprobante.CfdiRelacionados"] = field(
         default=None,
         metadata={
