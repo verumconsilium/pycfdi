@@ -8,13 +8,14 @@ from xsdata.formats.dataclass.serializers.config import SerializerConfig
 from xsdata.formats.dataclass.parsers import XmlParser
 from xsdata.utils import namespaces
 import os.path
-from pycfdi.complementos import (pagos10, timbre_fiscal_digitalv11)
+from pycfdi.complementos import (pagos10, timbre_fiscal_digitalv11, nomina12)
 
 T = TypeVar("T")
 
 COMPLEMENTO_TYPES_MAP = {
     'http://www.sat.gob.mx/Pagos': pagos10.Pagos,
-    'http://www.sat.gob.mx/TimbreFiscalDigital': timbre_fiscal_digitalv11.TimbreFiscalDigital
+    'http://www.sat.gob.mx/TimbreFiscalDigital': timbre_fiscal_digitalv11.TimbreFiscalDigital,
+    'http://www.sat.gob.mx/nomina12': nomina12.Nomina
 }
 
 
